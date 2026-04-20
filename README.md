@@ -1,33 +1,60 @@
 # acc102-gold-analysis
-Reflection Report: Gold Price Trend Analysis
+Gold Price Analysis: China vs. US Market (Track 2)
 
-1. Problem Definition and Target Audience
-The primary objective of this project is to analyze the historical price trend of gold over the past five years (2021-2026). Gold is globally recognized as a "safe-haven" asset, particularly during periods of economic volatility and inflation. The target audience for this analysis is individual investors who are considering gold for wealth preservation but lack a clear, data-driven visualization of its recent performance. By providing an intuitive trend chart, this project helps them make informed investment decisions.
+Project Overview
 
-2. Data Source and Strategic Pivot
-The data utilized in this project was initially intended to be sourced from Yahoo Finance via the yfinance library. However, during the implementation phase, I encountered significant technical hurdles, specifically RemoteDataError and connection timeouts caused by network rate limits and international firewall restrictions.
+This project provides a comprehensive quantitative analysis of gold price trends, comparing the performance of the China Gold ETF (518880) and the US Gold ETF (GLD). By leveraging Python's data analysis ecosystem, the project evaluates historical trends, volatility, and technical momentum indicators to provide a cross-market perspective on gold as a safe-haven asset.
 
-To ensure project reliability, I demonstrated technical flexibility by pivoting to the Akshare financial library. I fetched the historical data of the China Gold ETF (Ticker: 518880). This domestic ETF closely tracks international gold spot prices, making it a reliable proxy for the analysis while ensuring stable data acquisition without network interference.
+This project was developed for Track 2: Data Analysis Project.
 
-3. Methodology and Technical Workflow
-The analytical workflow was conducted using Python in a Jupyter Notebook environment, involving three core stages:
+Key Features
 
-Data Acquisition: Using akshare to pull a five-year daily historical dataset.
+Dual-Market Data Integration: Combines domestic data (China Sina Finance) with international institutional data (WRDS/Yahoo Finance).
 
-Data Cleaning and Transformation: This was a critical step as the raw data contained Chinese headers. I used pandas to translate the headers (e.g., '收盘' to 'Close') into English to meet the assignment requirements and performed datetime conversion to enable time-series plotting. The cleaned data was then exported as a CSV file to the ./data directory for reproducibility.
+Technical Indicator Analysis: Includes 50-day and 200-day Moving Averages (MA), Bollinger Bands, and Relative Strength Index (RSI).
 
-Data Visualization: I employed the matplotlib library to generate a professional line chart. Customizations included font-weight adjustments, grid lines, and crimson-colored plot lines to enhance readability for the end-user.
+Risk Assessment: Calculates daily returns distribution and annualized rolling volatility.
 
-4. Key Findings and Insights
-The generated chart reveals a consistent and powerful bullish (upward) trend in gold prices from 2021 to 2026. A notable observation is the acceleration of price growth starting in late 2023, which likely reflects increased global demand for defensive assets. For individual investors, the visual evidence confirms that gold has provided substantial returns over the last five years, reinforcing its status as a resilient portfolio component.
+Cross-Market Benchmarking: Features a normalized comparison (Base=100) to visualize relative performance between the Chinese and US markets.
 
-5. Limitations and Future Improvements
-One limitation is that the Gold ETF price includes local market premiums and may slightly differ from the London Spot Gold price. In future iterations, I would incorporate moving averages (SMA) and volatility indicators to provide deeper technical insights for more advanced investors.
+Visualizations: The 8-Chart Dashboard
 
-AI Disclosure
+The core of this project is a professional-grade dashboard containing 8 specialized charts:
 
-AI Tool Used: Gemini (Google)
+Historical Trend: Basic price movement of the China Gold ETF.
 
-Access Date: April 19, 2026
+Moving Averages: Trend confirmation using MA50 and MA200.
 
-Extent of Usage: The AI was used to assist in debugging Python code (resolving ModuleNotFoundError and RemoteDataError), providing the structural template for the GitHub README, and helping to refine the English phrasing of this reflection report. All technical decisions, such as the switch to the Akshare library and the final data interpretations, were reviewed and verified by the student.
+Bollinger Bands: Volatility zones and potential reversal points.
+
+RSI Indicator: Momentum analysis for overbought/oversold conditions.
+
+Trading Volume: Market activity and liquidity analysis.
+
+Returns Distribution: Statistical distribution of daily price changes.
+
+Rolling Volatility: Risk evolution over time.
+
+Global Comparison: Normalized performance comparison between China and US markets.
+
+Data Sources
+
+China Data: Sina Finance / Akshare (Ticker: 518880.SH).
+
+US Data: WRDS Database / Yahoo Finance (Ticker: GLD).
+
+How to Run
+
+The analysis is structured into three easy-to-run Jupyter Notebook cells:
+
+Cell 1: Data initialization and local file loading.
+
+Cell 2: Advanced technical indicator calculation and dataset merging.
+
+Cell 3: Generation of the 8-chart professional dashboard.
+
+Author: [Fu Tianyi]
+
+Course: ACC102 Mini Assignment
+
+Track: Track 2 - Data Analysis Project
