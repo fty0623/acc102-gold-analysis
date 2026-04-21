@@ -1,96 +1,88 @@
 # acc102-gold-analysis
-Gold Price Analysis: China vs. US Market (Track 2)
+📊 Institutional Gold ETF Analysis Dashboard
 
 📌 Project Overview
 
-This project performs a high-fidelity quantitative analysis of gold price movements across two major global markets. By comparing the China Gold ETF (518880) with the US Gold ETF (GLD), we explore how gold acts as a hedge and safe-haven asset in different economic environments.
+This project provides a professional-grade quantitative financial tool designed to fetch, process, and visualize gold ETF performance. By comparing the domestic China Gold ETF (518880) with the US Gold ETF (GLD), the tool offers deep insights into cross-market arbitrage, momentum, and risk profiles.
 
-This study was specifically designed for the ACC102 Mini Assignment - Track 2.
+Upgraded to an Institutional Version, the entire workflow is now encapsulated into a modular, parameter-driven Python function. It features dynamic API integration with the Wharton Research Data Services (WRDS) database and includes a robust local fallback mechanism for uninterrupted execution.
 
-🛠️ Methodology & Technical Stack
+✨ Key Features & Technical Architecture
 
-The analysis follows a standard financial data science workflow:
+Dynamic WRDS API Integration:
 
-Data Acquisition: Seamlessly integrating local CSV datasets (sourced from Sina Finance and WRDS).
+Connects directly to the CRSP database via the wrds Python library to fetch live institutional data using SQL queries.
 
-Data Engineering: Cleaning time-series data, handling absolute price values for CRSP compliance, and performing inner-joins for market alignment.
+Robust Fallback Mechanism:
 
-Feature Engineering: Calculating multi-period moving averages, volatility (standard deviation), and relative strength indicators.
+Incorporates a try-except fallback sequence. If API credentials are not provided or the network fails, the system automatically deploys local .csv data to ensure successful pipeline execution.
 
-Visualization: Utilizing a GridSpec layout to synthesize 8 distinct dimensions of market data into a single coherent dashboard.
+Modular Encapsulation:
 
-Core Libraries Used:
+The core logic is wrapped in the generate_gold_dashboard() function, featuring proper Type Hinting and Google-style docstrings.
 
-Pandas: Data manipulation and time-series cleaning.
+Advanced Financial Engineering:
 
-Matplotlib & Seaborn: High-resolution financial charting.
+Computes complex metrics including Simple Moving Averages (MA50/200), Bollinger Bands (20-day STD), Relative Strength Index (RSI-14), Cumulative Returns, and Annualized Rolling Volatility.
 
-NumPy: Statistical calculations and annualized volatility metrics.
+📊 The 8-Chart Dashboard Suite
 
-📊 The 8-Chart Dashboard Explained
+The function generates a high-resolution, presentation-ready dashboard (exported automatically as PDF and PNG):
 
-The generated visualization dashboard provides a 360-degree view of the market:
+Macro Trend: Historical price action for the domestic market.
 
-Chart Type
+Trend Alignment: 50-Day and 200-Day SMA crossovers.
 
-Analysis Focus
+Volatility Regimes: Bollinger Bands indicating price exhaustion zones.
 
-Historical Trend
+Market Sentiment: RSI Oscillator tracking overbought/oversold thresholds.
 
-Long-term price appreciation in CNY.
+Portfolio Growth: Cumulative Gain (%) highlighting equity growth.
 
-Moving Averages
+Risk Profile: Daily returns distribution histogram (analyzing kurtosis/fat-tails).
 
-Trend filtering and momentum (MA50 vs MA200).
+Uncertainty Modeling: Annualized rolling volatility line chart.
 
-Bollinger Bands
-
-Volatility zones and price exhaustion points.
-
-RSI Indicator
-
-Overbought (>70) or oversold (<30) detection.
-
-Trading Volume
-
-Market participation and liquidity levels.
-
-Returns Distribution
-
-Probability of extreme daily price swings.
-
-Rolling Volatility
-
-Evolution of market uncertainty over time.
-
-Global Comparison
-
-Normalized performance benchmarking (China vs US).
+Global Benchmark: Normalized cross-market comparison (Base=100) between Chinese and US ETFs.
 
 📂 Repository Structure
 
-acc102_mini_assignment_Final_Track2.ipynb: The main analytical engine.
+gold_analysis_function.py: The main functional Python script.
 
-china_gold_etf.csv: Historical data for the domestic Chinese market.
+china_gold_etf.csv: Domestic Chinese market dataset (Required local input).
 
-wrds_gld_data.csv: Institutional-grade data for the US market.
+wrds_gld_data.csv: US market dataset (Used automatically as a fallback if the WRDS API is inactive).
 
-🚀 Execution Guide
+🚀 Execution Guide (How to Use)
 
-To reproduce this analysis:
+Ensure you have the required dependencies installed (pandas, matplotlib, seaborn, numpy, and optionally wrds).
 
-Place all .csv files in the same folder as the notebook.
+You can run the script directly from your terminal or IDE. To customize the analysis, modify the execution block at the bottom of the script:
 
-Run Cell 1 to initialize libraries and load datasets.
+if __name__ == "__main__":
+    # Specify the local path for domestic data
+    LOCAL_CHINA_DATA = 'china_gold_etf.csv'
+    
+    # WRDS Credentials. Enter your username string to activate live API.
+    # Leaving it as None triggers the robust local fallback mechanism.
+    WRDS_CREDENTIAL = None 
+    
+    # Execute the pipeline
+    generate_gold_dashboard(
+        china_data_source=LOCAL_CHINA_DATA,
+        wrds_usr=WRDS_CREDENTIAL,
+        us_ticker='GLD',
+        start_date='2021-01-01',
+        end_date='2026-01-01'
+    )
 
-Execute Cell 2 to compute technical indicators.
 
-Run Cell 3 to generate the comprehensive 8-chart dashboard.
+Upon successful execution, the script will output advanced_gold_dashboard.pdf and advanced_gold_dashboard.png into your active directory.
 
 Author: [Fu Tianyi]
 
 Student ID: [2471369]
 
-Course: ACC102 Business Computing
+Course: ACC102 Mini Assignment (Track 2)
 
-Track: Track 2 - Data Analysis Project
+Date: April 21, 2026
